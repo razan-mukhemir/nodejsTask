@@ -1,4 +1,5 @@
 const {readFileSync,writeFileSync}=require('fs');
+var User=require('./user.js')
 
 const readPlain=(filePath)=>{
     var content=readFileSync(filePath,'utf8');
@@ -11,9 +12,10 @@ const readPlain=(filePath)=>{
     var users=[];
 
     for(let i=1;i<result.length;i++){
-     users.push({id: result[i][0],first_name:result[i][1],last_name:result[i][2],email:result[i][3],gender:result[i][4],
-        ip_address:result[i][5],color:result[i][6],parentId:result[i][7]
-        })
+    let u=new User(result[i][0],result[i][1],result[i][2],result[i][3],result[i][4],result[i][5],result[i][6],result[i][7])
+
+    users.push(u);
+    
     }
 
     return users;
@@ -32,6 +34,4 @@ const readJsonFile=(filePath)=>{
 }
 
 readJsonFile('userData.json')
-
-
 
